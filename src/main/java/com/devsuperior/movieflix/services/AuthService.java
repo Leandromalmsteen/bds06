@@ -33,4 +33,11 @@ public class AuthService {
 			throw new ForbiddenException("Access denied");
 		}
 	}
+	
+	public void validateRoleMember(Long userId) {
+		User user = authenticated();
+		if (user.hasHole("ROLE_VISITOR")) {
+			throw new ForbiddenException("Access denied");
+		}
+	}
 }

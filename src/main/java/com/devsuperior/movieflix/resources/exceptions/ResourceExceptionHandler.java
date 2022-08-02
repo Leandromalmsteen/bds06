@@ -10,6 +10,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.client.HttpClientErrorException.UnprocessableEntity;
 
 import com.devsuperior.movieflix.services.exceptions.DatabaseException;
 import com.devsuperior.movieflix.services.exceptions.ForbiddenException;
@@ -69,6 +70,4 @@ public class ResourceExceptionHandler {
 		OAuthCustomError err = new OAuthCustomError("Unauthorized", e.getMessage());
 		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(err);
 	}
-	
-	
 }
