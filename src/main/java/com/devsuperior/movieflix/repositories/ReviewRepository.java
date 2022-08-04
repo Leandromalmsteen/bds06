@@ -19,4 +19,5 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 			+ "inner join review.movie movie "
 			+ "where :movie IN review.movie")
 	List<Review> findReviews(Movie movie);
+	
 }

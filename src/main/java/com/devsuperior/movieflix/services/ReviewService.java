@@ -37,7 +37,7 @@ public class ReviewService {
 	public ReviewDTO insert(ReviewDTO dto) {
 		Movie movie = movieRepository.getOne(dto.getMovieId());
 		User user = authService.authenticated();
-		authService.validateRoleMember(user.getId());;
+		authService.validateSelfOrMember(user.getId());
 		Review entity = new Review();
 		entity.setText(dto.getText());
 		entity.setMovie(movie);

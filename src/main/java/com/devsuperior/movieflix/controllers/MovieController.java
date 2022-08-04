@@ -32,7 +32,9 @@ public class MovieController {
 	
 	
 	@GetMapping
-	public ResponseEntity<Page<MovieGenreDTO>> findByGenres(@RequestParam(value = "genreId", defaultValue = "0") Long genreId, Pageable pageable){
+	public ResponseEntity<Page<MovieGenreDTO>> findByGenres(
+			@RequestParam(value = "genreId", defaultValue = "0" ) Long genreId,
+			Pageable pageable){
 		Page<MovieGenreDTO> list = service.findMovieGenre(genreId, pageable);
 		return ResponseEntity.ok().body(list);
 	}
