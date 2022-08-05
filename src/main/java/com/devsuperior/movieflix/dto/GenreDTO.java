@@ -11,6 +11,7 @@ public class GenreDTO implements Serializable {
 	private Long id;
 	private String name;
 	
+	
 	public GenreDTO() {
 		
 	}

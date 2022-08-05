@@ -13,7 +13,7 @@ public class MovieReviewsDTO implements Serializable {
 	private String text;
 	
 	private Long movieId;
-	
+
 	private User user;
 	
 	public MovieReviewsDTO() {
@@ -33,9 +33,7 @@ public class MovieReviewsDTO implements Serializable {
 		text = entity.getText();
 		movieId = entity.getMovie().getId();
 		user = entity.getUser();
-		
 	}
-
 	
 
 	public Long getId() {

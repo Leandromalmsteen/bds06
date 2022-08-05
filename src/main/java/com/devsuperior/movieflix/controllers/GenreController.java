@@ -1,8 +1,8 @@
 package com.devsuperior.movieflix.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +20,8 @@ public class GenreController {
 	private GenreService service;
 	
 	@GetMapping
-	public ResponseEntity<Page<GenreDTO>> findAll(Pageable pageable) throws UsernameNotFoundException{
-		Page<GenreDTO> list = service.findAll(pageable);
+	public ResponseEntity<List<GenreDTO>> findAll() throws UsernameNotFoundException{
+		List<GenreDTO> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 }
