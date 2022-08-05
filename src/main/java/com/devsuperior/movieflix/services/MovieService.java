@@ -16,7 +16,6 @@ import com.devsuperior.movieflix.dto.MovieReviewsDTO;
 import com.devsuperior.movieflix.entities.Genre;
 import com.devsuperior.movieflix.entities.Movie;
 import com.devsuperior.movieflix.entities.Review;
-import com.devsuperior.movieflix.entities.User;
 import com.devsuperior.movieflix.repositories.GenreRepository;
 import com.devsuperior.movieflix.repositories.MovieRepository;
 import com.devsuperior.movieflix.repositories.ReviewRepository;
@@ -33,12 +32,6 @@ public class MovieService {
 	
 	@Autowired 
 	private GenreRepository genreRepository;
-	
-	@Autowired 
-	private AuthService authService;
-	
-	
-	
 
 	@Transactional(readOnly = true)
 	public MovieDTO findById(Long id) {
@@ -51,7 +44,7 @@ public class MovieService {
 	@Transactional(readOnly = true)
 	public Page<MovieGenreDTO> findMovieGenre(Long genreId, Pageable pageable){
 		Genre genre = (genreId == 0) ? null : genreRepository.getOne(genreId);
-		Page<Movie> list = repository.findByGenre(genre.getId(), pageable);
+		Page<Movie> list = (genre == null) ? repository.findAllOrdeByTitle(pageable) : repository.findByGenre(genre.getId(), pageable);
 		return list.map(x -> new MovieGenreDTO(x));
 
 	}

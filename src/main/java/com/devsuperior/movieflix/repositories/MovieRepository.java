@@ -19,6 +19,8 @@ public interface MovieRepository extends JpaRepository<Movie, Long>{
 			+ "INNER JOIN m.genre genres "
 			+ "WHERE :genreId IN genres ORDER BY m.title")
 	Page<Movie> findByGenre(Long genreId, Pageable pageable);
-	
+
+	@Query(nativeQuery = true, value = "SELECT * FROM tb_movie m ORDER BY m.title ")
+	Page<Movie> findAllOrdeByTitle(Pageable pageable);
 	
 }
