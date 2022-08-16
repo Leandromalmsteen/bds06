@@ -3,7 +3,6 @@ package com.devsuperior.movieflix.dto;
 import java.io.Serializable;
 
 import com.devsuperior.movieflix.entities.Review;
-import com.devsuperior.movieflix.entities.User;
 
 public class MovieReviewsDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -14,14 +13,14 @@ public class MovieReviewsDTO implements Serializable {
 	
 	private Long movieId;
 
-	private User user;
+	private UserDTO user;
 	
 	public MovieReviewsDTO() {
 		
 	}
 
 	
-	public MovieReviewsDTO(Long id, String text, Long movieId, User user) {
+	public MovieReviewsDTO(Long id, String text, Long movieId, UserDTO user) {
 		this.id = id;
 		this.text = text;
 		this.movieId = movieId;
@@ -32,8 +31,9 @@ public class MovieReviewsDTO implements Serializable {
 		id = entity.getId();
 		text = entity.getText();
 		movieId = entity.getMovie().getId();
-		user = entity.getUser();
+		user = new UserDTO(entity.getUser().getId(), entity.getUser().getName(), entity.getUser().getEmail());
 	}
+	
 	
 
 	public Long getId() {
@@ -66,12 +66,12 @@ public class MovieReviewsDTO implements Serializable {
 	}
 
 
-	public User getUser() {
+	public UserDTO getUser() {
 		return user;
 	}
 
 
-	public void setUser(User user) {
+	public void setUser(UserDTO user) {
 		this.user = user;
 	}
 

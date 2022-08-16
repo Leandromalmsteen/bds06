@@ -32,20 +32,21 @@ public class MovieService {
 	
 	@Autowired 
 	private GenreRepository genreRepository;
-
+	
+	
 	@Transactional(readOnly = true)
 	public MovieDTO findById(Long id) {
 		Optional<Movie> obj = repository.findById(id);
 		Movie entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
 		return new MovieDTO(entity);
 	}
-	
+
 	
 	@Transactional(readOnly = true)
 	public Page<MovieGenreDTO> findMovieGenre(Long genreId, Pageable pageable){
 		Genre genre = (genreId == 0) ? null : genreRepository.getOne(genreId);
-		Page<Movie> list = (genre == null) ? repository.findAllOrdeByTitle(pageable) : repository.findByGenre(genre.getId(), pageable);
-		return list.map(x -> new MovieGenreDTO(x));
+		Page<Movie> page = (genre == null) ? repository.findAllOrdeByTitle(pageable) : repository.findByGenre(genre, pageable);
+		return page.map(x -> new MovieGenreDTO(x));
 
 	}
 	
