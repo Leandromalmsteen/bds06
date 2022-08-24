@@ -27,18 +27,9 @@ public class AuthService {
 		}
 	}
 	
-	@Transactional(readOnly = true)
-	public void validateSelfOrMember(Long userId) {
+	public void validateSelfOrAdmin(Long userId) {
 		User user = authenticated();
-		if (!user.getId().equals(userId) || (user.hasHole("ROLE_VISITOR"))) {
-			throw new ForbiddenException("Access denied");
-		}
-	}
-	
-	@Transactional(readOnly = true)
-	public void validateHole(Long userId) {
-		User user = authenticated();
-		if ((!user.hasHole("ROLE_VISITOR")) || (!user.hasHole("ROLE_MEMBER"))) {
+		if (!user.getId().equals(userId) && (user.hasHole("ROLE_MEMBER"))) {
 			throw new ForbiddenException("Access denied");
 		}
 	}

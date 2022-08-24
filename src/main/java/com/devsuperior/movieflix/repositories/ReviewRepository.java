@@ -17,9 +17,9 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 
 	Page<Review> findByUser(User user, Pageable pageable);
 	
-	@Query("select review from Review review "
-			+ "inner join review.movie movie "
-			+ "where :movie IN review.movie")
-	List<Review> findReviews(Movie movie);
+	@Query("select obj from Review obj "
+			+ "JOIN FETCH obj.user "
+			+ "where obj.movie = :movie")
+	List<Review> findByMovie(Movie movie);
 	
 }
